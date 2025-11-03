@@ -1,0 +1,31 @@
+    #include <stdio.h>
+int main() {
+    int totalCustomers;
+    float totalRevenue = 0;
+    printf("Enter total number of customers: ");
+    scanf("%d", &totalCustomers);
+        int numItems, code, qty;
+        float total = 0, discount = 0, finalBill = 0;
+numItems → how many different items they ordered
+
+code → the menu code for each item (1–5)
+
+qty → how many quantities of that item
+
+total → sum of all items before discount
+
+discount → discount amount (if applicable)
+
+finalBill → total after discount
+            printf("\nEnter item code: ");
+            scanf("%d", &code);
+                        float price = 0
+price stores the price of the current item
+            if (code == 1) price = 80;        // Sandwich
+            else if (code == 2) price = 120;  // Burger
+            else if (code == 3) price = 150;  // Pizza Slice
+            else if (code == 4) price = 60;   // Coffee
+            else if (code == 5) price = 50;   // Juice
+
+the customer’s individual bill, showing total, discount, and final amount in a formatted way.
+  return 0;
