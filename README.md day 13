@@ -1,0 +1,6 @@
+This C program titled  Employee salary analysis system with student identifaction is desinged ti perform salary analysis for multiple employees while including the students indentifaction details
+Display all employee salaries
+calculate and show the total average salary
+count how many employees have salaries above and below the average
+sort and display salaries in ascendind order using bubble sort algorithm 
+sort and display salaries in descending order
