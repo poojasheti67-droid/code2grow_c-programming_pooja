@@ -1,0 +1,114 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char name[50], regno[20], section[10];
+    int n, i, j, choice;
+    float salary[10], sum = 0, avg = 0, temp;
+    int above = 0, below = 0;
+
+    printf("======= Employee Salary Analysis System =======\n");
+    printf("Enter Student Name: ");
+    gets(name);
+    printf("Enter Registration Number: ");
+    gets(regno);
+    printf("Enter Section: ");
+    gets(section);
+
+    printf("\nEnter number of employees (max 10): ");
+    scanf("%d", &n);
+
+    printf("Enter salaries:\n");
+    for (i = 0; i < n; i++) {
+        printf("%d: ", i + 1);
+        scanf("%f", &salary[i]);
+    }
+
+    do {
+        printf("\n======= Menu =======\n");
+        printf("1. Display All Salaries\n");
+        printf("2. Display Total and Average Salary\n");
+        printf("3. Count Above and Below Average\n");
+        printf("4. Display Sorted Salaries (Ascending)\n");
+        printf("5. Display Sorted Salaries (Descending)\n");
+        printf("6. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("\nEmployee Salaries:\n");
+                for (i = 0; i < n; i++) {
+                    printf("%.2f\n", salary[i]);
+                }
+                break;
+
+            case 2:
+                sum = 0;
+                for (i = 0; i < n; i++) sum += salary[i];
+                avg = sum / n;
+                printf("\nTotal Salary = %.2f", sum);
+                printf("\nAverage Salary = %.2f\n", avg);
+                break;
+
+            case 3:
+                sum = 0;
+                for (i = 0; i < n; i++) sum += salary[i];
+                avg = sum / n;
+                above = below = 0;
+                for (i = 0; i < n; i++) {
+                    if (salary[i] > avg) above++;
+                    else if (salary[i] < avg) below++;
+                }
+                printf("\nAverage Salary = %.2f", avg);
+                printf("\nAbove Average = %d", above);
+                printf("\nBelow Average = %d\n", below);
+                break;
+
+            case 4:
+                for (i = 0; i < n - 1; i++) {
+                    for (j = 0; j < n - i - 1; j++) {
+                        if (salary[j] > salary[j + 1]) {
+                            temp = salary[j];
+                            salary[j] = salary[j + 1];
+                            salary[j + 1] = temp;
+                        }
+                    }
+                }
+                printf("\nSalaries in Ascending Order:\n");
+                for (i = 0; i < n; i++)
+                    printf("%.2f\n", salary[i]);
+                break;
+
+            case 5:
+                for (i = 0; i < n - 1; i++) {
+                    for (j = 0; j < n - i - 1; j++) {
+                        if (salary[j] < salary[j + 1]) {
+                            temp = salary[j];
+                            salary[j] = salary[j + 1];
+                            salary[j + 1] = temp;
+                        }
+                    }
+                }
+                printf("\nSalaries in Descending Order:\n");
+                for (i = 0; i < n; i++)
+                    printf("%.2f\n", salary[i]);
+                break;
+
+            case 6:
+                printf("\nExiting Program...\n");
+                break;
+
+            default:
+                printf("\nInvalid choice! Please try again.\n");
+        }
+
+    } while (choice != 6);
+
+    printf("\n--------------------------------------\n");
+    printf("Analyzed by: %s | Reg No: %s | Section: %s\n", name, regno, section);
+    printf("Challenge Day 17 - Code2Grow Program\n");
+    printf("--------------------------------------\n");
+
+    return 0;
+}
