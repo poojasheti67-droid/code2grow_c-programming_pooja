@@ -1,0 +1,6 @@
+ALLOWS adding new product details into the 2D array 
+Increase or decrease product quantity with validation ( no negetive rules)
+Finds product with max quqntity
+Finds the product with min quantity 
+It calculates the total stock count 
+It presents all product records in clean table format 
