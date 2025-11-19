@@ -1,0 +1,8 @@
+compares each vehicles speed with the given speed limit
+counts how many vechicles exceeded the limit 
+Finds the highest speed recorded
+vehicles with speed>45km/h must not be lane3
+counts how many vehicles violate this rule
+uses a simple 1D array to store lane-wise counts
+Detects rule breaking vehicles
+shows lane usage
