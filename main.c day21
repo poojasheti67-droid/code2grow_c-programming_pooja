@@ -1,0 +1,115 @@
+
+#include <stdio.h>
+
+#define MAX 20
+  
+void inputVehicleData(int speeds[], int lanes[], int n);
+int countSpeedViolations(int speeds[], int n, int limit);
+int highestSpeed(int speeds[], int n);
+int countLaneViolations(int lanes[], int speeds[], int n);
+void trafficDensity(int lanes[], int n, int laneCount[]);
+void generateReport(int speeds[], int lanes[], int n, int limit);
+
+
+
+int main() {
+    int speeds[MAX], lanes[MAX];
+    int n, limit;
+
+    printf("Enter number of vehicles (max 20): ");
+    scanf("%d", &n);
+
+    if(n > 20 || n <= 0) {
+        printf("Invalid entry limit!");
+        return 0;
+    }
+
+    printf("Enter speed limit: ");
+    scanf("%d", &limit);
+
+    inputVehicleData(speeds, lanes, n);
+
+    printf("\n===== OVERALL TRAFFIC REPORT =====\n");
+    generateReport(speeds, lanes, n, limit);
+
+    return 0;
+}
+
+Input Function 
+void inputVehicleData(int speeds[], int lanes[], int n) {
+    int i;
+
+    for(i = 0; i < n; i++) {
+        printf("\nVehicle %d speed: ", i+1);
+        scanf("%d", &speeds[i]);
+
+        if(speeds[i] <= 0) {
+            printf("Invalid speed! Enter again: ");
+            scanf("%d", &speeds[i]);
+        }
+
+        printf("Vehicle %d lane (1-4): ", i+1);
+        scanf("%d", &lanes[i]);
+
+        if(lanes[i] < 1 || lanes[i] > 4) {
+            printf("Invalid lane! Enter again (1-4): ");
+            scanf("%d", &lanes[i]);
+        }
+    }
+}
+
+ Speed Violation 
+int countSpeedViolations(int speeds[], int n, int limit) {
+    int i, count = 0;
+    for(i = 0; i < n; i++) {
+        if(speeds[i] > limit)
+            count++;
+    }
+    return count;
+}
+
+int highestSpeed(int speeds[], int n) {
+    int i, max = speeds[0];
+    for(i = 1; i < n; i++) {
+        if(speeds[i] > max)
+            max = speeds[i];
+    }
+    return max;
+Lane Violation 
+int countLaneViolations(int lanes[], int speeds[], int n) {
+    int i, count = 0;
+    for(i = 0; i < n; i++) {
+        if(speeds[i] > 45 && lanes[i] == 3) {
+            count++;
+        }
+    }
+    return count;
+}
+
+Traffic Density
+void trafficDensity(int lanes[], int n, int laneCount[]) {
+    int i;
+    for(i = 0; i < 4; i++)
+        laneCount[i] = 0;
+
+    for(i = 0; i < n; i++)
+        laneCount[lanes[i] - 1]++;
+}
+
+ Generate Final Report
+void generateReport(int speeds[], int lanes[], int n, int limit) {
+    int laneCount[4];
+    trafficDensity(lanes, n, laneCount);
+
+    printf("\nSpeed violations: %d\n", countSpeedViolations(speeds, n, limit));
+    printf("Highest speed recorded: %d km/h\n", highestSpeed(speeds, n));
+    printf("Lane violations: %d\n", countLaneViolations(lanes, speeds, n));
+
+    printf("\n--- Traffic Density per Lane ---\n");
+    printf("Lane 1: %d\n", laneCount[0]);
+    printf("Lane 2: %d\n", laneCount[1]);
+    printf("Lane 3: %d\n", laneCount[2]);
+    printf("Lane 4: %d\n", laneCount[3]);
+
+    printf("\nTotal vehicles: %d\n", n);
+}
